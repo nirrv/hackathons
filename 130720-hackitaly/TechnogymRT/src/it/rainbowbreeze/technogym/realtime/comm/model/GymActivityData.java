@@ -38,10 +38,10 @@ public final class GymActivityData extends com.google.api.client.json.GenericJso
   private com.google.api.client.util.DateTime created;
 
   /**
-   * The value may be {@code null}.
+   * The value cannot be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String fullUrl;
+  private String mUsername;
 
   /**
    * The value may be {@code null}.
@@ -50,34 +50,23 @@ public final class GymActivityData extends com.google.api.client.json.GenericJso
   private java.lang.Long id;
 
   /**
-   * The value may be {@code null}.
+   * The value cannot be {@code null}.
    */
   @com.google.api.client.util.Key
-  private com.google.api.client.util.DateTime lastModified;
+  private long mTimestamp;
 
   /**
-   * The value may be {@code null}.
+   * The value cannot be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String latitude;
+  private int mDistance;
 
   /**
+   * Rotation degrees. 90 for right rotation, 270 for left rotation
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String longitude;
-
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String name;
-
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String thumbnailUrl;
+  private int mRotation;
 
   /**
    * @return value or {@code null} for none
@@ -97,15 +86,15 @@ public final class GymActivityData extends com.google.api.client.json.GenericJso
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getFullUrl() {
-    return fullUrl;
+  public java.lang.String getUsername() {
+    return mUsername;
   }
 
   /**
-   * @param fullUrl fullUrl or {@code null} for none
+   * @param username fullUrl or {@code null} for none
    */
-  public GymActivityData setFullUrl(java.lang.String fullUrl) {
-    this.fullUrl = fullUrl;
+  public GymActivityData setUsername(java.lang.String username) {
+    this.mUsername = username;
     return this;
   }
 
@@ -127,75 +116,45 @@ public final class GymActivityData extends com.google.api.client.json.GenericJso
   /**
    * @return value or {@code null} for none
    */
-  public com.google.api.client.util.DateTime getLastModified() {
-    return lastModified;
+  public long getTimestamp() {
+    return mTimestamp;
   }
 
   /**
-   * @param lastModified lastModified or {@code null} for none
+   * @param distance or {@code null} for none
    */
-  public GymActivityData setLastModified(com.google.api.client.util.DateTime lastModified) {
-    this.lastModified = lastModified;
+  public GymActivityData setDistance(int distance) {
+    this.mDistance = distance;
     return this;
   }
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getLatitude() {
-    return latitude;
+  public int getDistance() {
+    return mDistance;
+  }
+
+  /**
+   * @param rotation or {@code null} for none
+   */
+  public GymActivityData setRotation(int rotation) {
+    this.mRotation = rotation;
+    return this;
+  }
+
+  /**
+   * @return rotation or {@code null} for none
+   */
+  public int getRotation() {
+    return mRotation;
   }
 
   /**
    * @param latitude latitude or {@code null} for none
    */
-  public GymActivityData setLatitude(java.lang.String latitude) {
-    this.latitude = latitude;
-    return this;
-  }
-
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getLongitude() {
-    return longitude;
-  }
-
-  /**
-   * @param longitude longitude or {@code null} for none
-   */
-  public GymActivityData setLongitude(java.lang.String longitude) {
-    this.longitude = longitude;
-    return this;
-  }
-
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getName() {
-    return name;
-  }
-
-  /**
-   * @param name name or {@code null} for none
-   */
-  public GymActivityData setName(java.lang.String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getThumbnailUrl() {
-    return thumbnailUrl;
-  }
-
-  /**
-   * @param thumbnailUrl thumbnailUrl or {@code null} for none
-   */
-  public GymActivityData setThumbnailUrl(java.lang.String thumbnailUrl) {
-    this.thumbnailUrl = thumbnailUrl;
+  public GymActivityData setTimestamp(long timestamp) {
+    this.mTimestamp = timestamp;
     return this;
   }
 
@@ -209,4 +168,12 @@ public final class GymActivityData extends com.google.api.client.json.GenericJso
     return (GymActivityData) super.clone();
   }
 
+    public void turnRight() {
+        mRotation = 90;
+        // TODO Auto-generated method stub
+    }
+
+    public void turnLeft() {
+        mRotation = 270;
+    }
 }

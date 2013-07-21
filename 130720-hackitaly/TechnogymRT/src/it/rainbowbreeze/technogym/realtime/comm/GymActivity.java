@@ -123,18 +123,18 @@ public class GymActivity extends com.google.api.client.googleapis.services.json.
    * Create a request for the method "create".
    *
    * This request holds the parameters needed by the the businesscard server.  After setting any
-   * optional parameters, call the {@link Create#execute()} method to invoke the remote operation.
+   * optional parameters, call the {@link UploadData#execute()} method to invoke the remote operation.
    *
    * @param content the {@link GymActivityData}
    * @return the request
    */
-  public Create create(GymActivityData content) throws java.io.IOException {
-    Create result = new Create(content);
+  public UploadData uploadData(GymActivityData content) throws java.io.IOException {
+    UploadData result = new UploadData(content);
     initialize(result);
     return result;
   }
 
-  public class Create extends GymActivityDataRequest<GymActivityData> {
+  public class UploadData extends GymActivityDataRequest<GymActivityData> {
 
     private static final String REST_PATH = "businesscard/v1/businesscard";
 
@@ -142,56 +142,56 @@ public class GymActivity extends com.google.api.client.googleapis.services.json.
      * Create a request for the method "create".
      *
      * This request holds the parameters needed by the the businesscard server.  After setting any
-     * optional parameters, call the {@link Create#execute()} method to invoke the remote operation.
+     * optional parameters, call the {@link UploadData#execute()} method to invoke the remote operation.
      * <p> {@link
-     * Create#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)} must
+     * UploadData#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)} must
      * be called to initialize this instance immediately after invoking the constructor. </p>
      *
      * @param content the {@link GymActivityData}
      * @since 1.13
      */
-    protected Create(GymActivityData content) {
+    protected UploadData(GymActivityData content) {
       super(GymActivity.this, "POST", REST_PATH, content, GymActivityData.class);
     }
 
     @Override
-    public Create setAlt(java.lang.String alt) {
-      return (Create) super.setAlt(alt);
+    public UploadData setAlt(java.lang.String alt) {
+      return (UploadData) super.setAlt(alt);
     }
 
     @Override
-    public Create setFields(java.lang.String fields) {
-      return (Create) super.setFields(fields);
+    public UploadData setFields(java.lang.String fields) {
+      return (UploadData) super.setFields(fields);
     }
 
     @Override
-    public Create setKey(java.lang.String key) {
-      return (Create) super.setKey(key);
+    public UploadData setKey(java.lang.String key) {
+      return (UploadData) super.setKey(key);
     }
 
     @Override
-    public Create setOauthToken(java.lang.String oauthToken) {
-      return (Create) super.setOauthToken(oauthToken);
+    public UploadData setOauthToken(java.lang.String oauthToken) {
+      return (UploadData) super.setOauthToken(oauthToken);
     }
 
     @Override
-    public Create setPrettyPrint(java.lang.Boolean prettyPrint) {
-      return (Create) super.setPrettyPrint(prettyPrint);
+    public UploadData setPrettyPrint(java.lang.Boolean prettyPrint) {
+      return (UploadData) super.setPrettyPrint(prettyPrint);
     }
 
     @Override
-    public Create setQuotaUser(java.lang.String quotaUser) {
-      return (Create) super.setQuotaUser(quotaUser);
+    public UploadData setQuotaUser(java.lang.String quotaUser) {
+      return (UploadData) super.setQuotaUser(quotaUser);
     }
 
     @Override
-    public Create setUserIp(java.lang.String userIp) {
-      return (Create) super.setUserIp(userIp);
+    public UploadData setUserIp(java.lang.String userIp) {
+      return (UploadData) super.setUserIp(userIp);
     }
 
     @Override
-    public Create set(String parameterName, Object value) {
-      return (Create) super.set(parameterName, value);
+    public UploadData set(String parameterName, Object value) {
+      return (UploadData) super.set(parameterName, value);
     }
   }
 
@@ -317,7 +317,7 @@ public class GymActivity extends com.google.api.client.googleapis.services.json.
    * @param id
    * @return the request
    */
-  public Read read(java.lang.Long id) throws java.io.IOException {
+  public Read getRoomState(java.lang.Long id) throws java.io.IOException {
     Read result = new Read(id);
     initialize(result);
     return result;
@@ -443,7 +443,7 @@ public class GymActivity extends com.google.api.client.googleapis.services.json.
     protected Remove(java.lang.Long id) {
       super(GymActivity.this, "DELETE", REST_PATH, null, GymActivityData.class);
       this.id = com.google.api.client.util.Preconditions.checkNotNull(id, "Required parameter id must be specified.");
-    }
+     }
 
     @Override
     public Remove setAlt(java.lang.String alt) {

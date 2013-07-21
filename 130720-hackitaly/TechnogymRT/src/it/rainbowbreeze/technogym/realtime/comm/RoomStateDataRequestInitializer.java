@@ -19,7 +19,7 @@
 package it.rainbowbreeze.technogym.realtime.comm;
 
 /**
- * GymActivityData request initializer for setting properties like key and userIp.
+ * Businesscard request initializer for setting properties like key and userIp.
  *
  * <p>
  * The simplest usage is to use it to set the key parameter:
@@ -79,16 +79,16 @@ package it.rainbowbreeze.technogym.realtime.comm;
  *
  * @since 1.12
  */
-public class GymActivityDataRequestInitializer extends com.google.api.client.googleapis.services.json.CommonGoogleJsonClientRequestInitializer {
+public class RoomStateDataRequestInitializer extends com.google.api.client.googleapis.services.json.CommonGoogleJsonClientRequestInitializer {
 
-  public GymActivityDataRequestInitializer() {
+  public RoomStateDataRequestInitializer() {
     super();
   }
 
   /**
    * @param key API key or {@code null} to leave it unchanged
    */
-  public GymActivityDataRequestInitializer(String key) {
+  public RoomStateDataRequestInitializer(String key) {
     super(key);
   }
 
@@ -96,14 +96,14 @@ public class GymActivityDataRequestInitializer extends com.google.api.client.goo
    * @param key API key or {@code null} to leave it unchanged
    * @param userIp user IP or {@code null} to leave it unchanged
    */
-  public GymActivityDataRequestInitializer(String key, String userIp) {
+  public RoomStateDataRequestInitializer(String key, String userIp) {
     super(key, userIp);
   }
 
   @Override
   public final void initializeJsonRequest(com.google.api.client.googleapis.services.json.AbstractGoogleJsonClientRequest<?> request) throws java.io.IOException {
     super.initializeJsonRequest(request);
-    initializeGymActivityDataRequest((GymActivityDataRequest<?>) request);
+    initializeRoomStateDataRequest((RoomStateDataRequest<?>) request);
   }
 
   /**
@@ -116,6 +116,6 @@ public class GymActivityDataRequestInitializer extends com.google.api.client.goo
    *
    * @throws java.io.IOException I/O exception
    */
-  protected void initializeGymActivityDataRequest(GymActivityDataRequest<?> request) throws java.io.IOException {
+  protected void initializeRoomStateDataRequest(RoomStateDataRequest<?> request) throws java.io.IOException {
   }
 }

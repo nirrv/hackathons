@@ -1,5 +1,8 @@
-package it.rainbowbreeze.hackitaly13;
+package it.rainbowbreeze.hackitaly13.ui;
 
+import it.rainbowbreeze.hackitaly13.R;
+import it.rainbowbreeze.hackitaly13.R.layout;
+import it.rainbowbreeze.hackitaly13.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
