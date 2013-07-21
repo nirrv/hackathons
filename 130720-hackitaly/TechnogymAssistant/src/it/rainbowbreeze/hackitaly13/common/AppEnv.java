@@ -4,17 +4,17 @@
 package it.rainbowbreeze.hackitaly13.common;
 
 import static it.rainbowbreeze.libs.common.RainbowContractHelper.checkNotNull;
+import it.rainbowbreeze.hackitaly13.ui.ActivityHelper;
+import it.rainbowbreeze.libs.common.RainbowServiceLocator;
+import it.rainbowbreeze.libs.logic.RainbowCrashReporter;
+import it.rainbowbreeze.technogym.realtime.logic.GymActivityManager;
+import it.rainbowbreeze.technogym.realtime.logic.RoomStateManager;
+import android.content.Context;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-
-import it.rainbowbreeze.libs.common.RainbowServiceLocator;
-import it.rainbowbreeze.libs.logic.RainbowCrashReporter;
-import it.rainbowbreeze.technogym.realtime.logic.UploadGymActivityManager;
-import it.rainbowbreeze.hackitaly13.ui.ActivityHelper;
-import android.content.Context;
 
 /**
  * Main application classes lazy-loading singleton
@@ -98,9 +98,14 @@ public class AppEnv {
                 LogFacility.class), LogFacility.class.getSimpleName());
     }
     
-    public UploadGymActivityManager getUploadGymActivityManager() {
+    public GymActivityManager getGymActivityManager() {
         return checkNotNull(RainbowServiceLocator.get(
-                UploadGymActivityManager.class), LogFacility.class.getSimpleName());
+                GymActivityManager.class), GymActivityManager.class.getSimpleName());
+    }
+    
+    public RoomStateManager getRoomStateManager() {
+        return checkNotNull(RainbowServiceLocator.get(
+                RoomStateManager.class), RoomStateManager.class.getSimpleName());
     }
     
     public ActivityHelper getActivityHelper() {
@@ -135,8 +140,10 @@ public class AppEnv {
         
         final HttpTransport transport = AndroidHttp.newCompatibleTransport();
         final JsonFactory jsonFactory = new GsonFactory();
-        UploadGymActivityManager uploadGymActivityManager = new UploadGymActivityManager(logFacility, transport, jsonFactory);
-        RainbowServiceLocator.put(uploadGymActivityManager);
+        GymActivityManager gymActivityManager = new GymActivityManager(logFacility, transport, jsonFactory);
+        RainbowServiceLocator.put(gymActivityManager);
+        RoomStateManager roomStateManager = new RoomStateManager(logFacility, transport, jsonFactory);
+        RainbowServiceLocator.put(roomStateManager);
     }
     
     

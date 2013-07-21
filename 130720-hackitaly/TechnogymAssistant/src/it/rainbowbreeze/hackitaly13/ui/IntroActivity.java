@@ -1,10 +1,10 @@
 package it.rainbowbreeze.hackitaly13.ui;
 
 import it.rainbowbreeze.hackitaly13.R;
-import it.rainbowbreeze.hackitaly13.R.layout;
-import it.rainbowbreeze.hackitaly13.R.menu;
-import android.os.Bundle;
+import it.rainbowbreeze.hackitaly13.common.AppEnv;
+import it.rainbowbreeze.technogym.realtime.logic.RoomStateManager;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class IntroActivity extends Activity
@@ -15,6 +15,16 @@ public class IntroActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_intro);
+		
+		Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+//              GymActivityManager gymActiviyManager = AppEnv.i(getApplicationContext()).getGymActivityManager();
+                RoomStateManager roomStateManager = AppEnv.i(getApplicationContext()).getRoomStateManager();
+                roomStateManager.getRoomState(getApplicationContext(), 1000);
+            }
+        });
+		t.start();
 	}
 
 	@Override
