@@ -103,15 +103,18 @@ public class AppEnv {
                 GymActivityManager.class), GymActivityManager.class.getSimpleName());
     }
     
-    public RoomStateManager getRoomStateManager() {
-        return checkNotNull(RainbowServiceLocator.get(
-                RoomStateManager.class), RoomStateManager.class.getSimpleName());
-    }
-    
     public ActivityHelper getActivityHelper() {
         return checkNotNull(RainbowServiceLocator.get(
                 ActivityHelper.class), ActivityHelper.class.getSimpleName());
 	}
+    
+    public RoomStateManager createRoomStateManager(long roomId) {
+        final HttpTransport transport = AndroidHttp.newCompatibleTransport();
+        final JsonFactory jsonFactory = new GsonFactory();
+        return new RoomStateManager(getLogFacility(), transport, jsonFactory, roomId);
+    }
+    
+    
     
     // ----------------------------------------- Private Methods
     /**
@@ -142,8 +145,6 @@ public class AppEnv {
         final JsonFactory jsonFactory = new GsonFactory();
         GymActivityManager gymActivityManager = new GymActivityManager(logFacility, transport, jsonFactory);
         RainbowServiceLocator.put(gymActivityManager);
-        RoomStateManager roomStateManager = new RoomStateManager(logFacility, transport, jsonFactory);
-        RainbowServiceLocator.put(roomStateManager);
     }
     
     

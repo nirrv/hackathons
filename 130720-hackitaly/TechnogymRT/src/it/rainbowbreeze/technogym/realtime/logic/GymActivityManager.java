@@ -36,18 +36,6 @@ public class GymActivityManager {
         mGymActivity = new GymActivity(transport, jsonFactory, null);
     }
     
-    public void startFromApplication(Context context) {
-        mLogFacility.v(LOG_HASH, "Starting scheduled service for uploading data from the application");
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-
-        scheduler.scheduleAtFixedRate(new Runnable() {
-                    public void run() {
-                        //TODO read data from the server
-                        //mGymActivity.getRoomState(roomId);
-                    }
-                }, 0, 5, TimeUnit.SECONDS);
-    }
-
     public void turnLeft(Context context) {
         //sends new user data
         GymActivityData data = gatherData(context);

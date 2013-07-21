@@ -20,8 +20,8 @@ public class IntroActivity extends Activity
             @Override
             public void run() {
 //              GymActivityManager gymActiviyManager = AppEnv.i(getApplicationContext()).getGymActivityManager();
-                RoomStateManager roomStateManager = AppEnv.i(getApplicationContext()).getRoomStateManager();
-                roomStateManager.getRoomState(getApplicationContext(), 1000);
+                RoomStateManager roomStateManager = AppEnv.i(getApplicationContext()).createRoomStateManager(1000);
+                roomStateManager.getRoomState(getApplicationContext());
             }
         });
 		t.start();

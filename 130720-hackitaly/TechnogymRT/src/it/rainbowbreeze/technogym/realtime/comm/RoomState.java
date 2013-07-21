@@ -59,7 +59,7 @@ public class RoomState extends com.google.api.client.googleapis.services.json.Ab
    *
    * @since 1.7
    */
-  public static final String DEFAULT_ROOT_URL = "https://namekeeprtest.appspot.com/_ah/api/";
+  public static final String DEFAULT_ROOT_URL = "https://10.1.8.81:80/";
 
   /**
    * The default encoded service path of the service. This is determined when the library is
