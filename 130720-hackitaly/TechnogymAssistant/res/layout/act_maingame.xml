@@ -14,6 +14,7 @@
         android:background="@color/game_button_back"
     >
         <TextView
+            android:id="@+id/maingame_lblCollisions"
             android:layout_width="130px"
             android:layout_height="70px"
             android:layout_marginTop="60px"
@@ -25,51 +26,52 @@
             android:text="3"
         />
     </FrameLayout>
-    <FrameLayout
-        android:id="@+id/maingame_frmCollisionsSeparator"
+    <View
+        android:id="@+id/maingame_vwCollisionsSeparator"
         android:layout_width="250px"
         android:layout_height="4px"
         android:layout_below="@id/maingame_frmCollisions"
         android:background="@drawable/maingame_separator_horizonal"
     />
-    <FrameLayout
-        android:id="@+id/maingame_frmVerticalSeparator"
+    <ImageView
+        android:id="@+id/maingame_btnSpeedUp"
+        android:layout_width="250px"
+        android:layout_height="245px"
+        android:layout_below="@id/maingame_vwCollisionsSeparator"
+        android:padding="0px"
+        android:src="@drawable/btn_plus"
+        android:scaleType="fitCenter"
+    />
+    <View
+        android:id="@+id/maingame_vwSpeedUpSeparator"
+        android:layout_width="250px"
+        android:layout_height="4px"
+        android:layout_below="@id/maingame_btnSpeedUp"
+        android:background="@drawable/maingame_separator_horizonal"
+    />
+    <ImageView
+        android:id="@+id/maingame_btnSpeedDown"
+        android:layout_width="250px"
+        android:layout_height="245px"
+        android:layout_margin="0px"
+        android:layout_below="@id/maingame_vwSpeedUpSeparator"
+        android:src="@drawable/btn_minus"
+        android:scaleType="fitCenter"
+    />
+    
+    <View
+        android:id="@+id/maingame_vwVerticalSeparator"
         android:layout_width="4px"
         android:layout_height="match_parent"
+        android:layout_marginLeft="-4px"
         android:layout_toRightOf="@id/maingame_frmCollisions"
         android:background="@color/game_separator_vertical"
     />
-    
-    <FrameLayout
-        android:id="@+id/maingame_frmSpeedUp"
-        android:layout_width="250px"
-        android:layout_height="245px"
-        android:layout_below="@id/maingame_frmCollisionsSeparator"
-        android:background="@color/game_button_back"
-    >
-    </FrameLayout>
-    <FrameLayout
-        android:id="@+id/maingame_frmSpeedUpSeparator"
-        android:layout_width="250px"
-        android:layout_height="4px"
-        android:layout_below="@id/maingame_frmSpeedUp"
-        android:background="@drawable/maingame_separator_horizonal"
-    />
-    
-    <FrameLayout
-        android:id="@+id/maingame_frmSpeedDown"
-        android:layout_width="250px"
-        android:layout_height="245px"
-        android:layout_below="@id/maingame_frmSpeedUpSeparator"
-        android:background="@color/game_button_back"
-    >
-    </FrameLayout>
-    
     <it.rainbowbreeze.hackitaly13.ui.TronFieldView
         android:id="@+id/maingame_vwMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/maingame_frmVerticalSeparator"
+        android:layout_toRightOf="@id/maingame_vwVerticalSeparator"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
     />

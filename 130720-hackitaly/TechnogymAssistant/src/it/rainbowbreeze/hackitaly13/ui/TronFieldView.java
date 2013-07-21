@@ -12,7 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -26,7 +25,7 @@ public class TronFieldView extends View {
     private LogFacility mLogFacility;
     
     private final static int FIELD_WIDTH = 20;
-    private final static int FIELD_LENGHT = 20;
+    private final static int FIELD_HEIGHT = 20;
     private static final int MAX_PLAYERS = 3;
     private static final byte EMPTY_FIELD = -1;
 
@@ -41,11 +40,12 @@ public class TronFieldView extends View {
     private static final int TAIL_LEFTUP = 9;
     private static final int TAIL_LEFTDOWN = 10;
     
-    private final byte[][] mTronField = new byte[FIELD_WIDTH][FIELD_LENGHT];
+    private byte[][] mPlayfield = new byte[FIELD_WIDTH][FIELD_HEIGHT];
     private final Bitmap[][] mTails = new Bitmap[10][MAX_PLAYERS];
+    private final Paint[] mPlayerPaints = new Paint[MAX_PLAYERS];
     private Paint mBitmapPaint;
     
-    public TronFieldView(Context context) {
+    public TronFieldView(Context context) { 
         super(context);
         initVars(context);
     }
@@ -65,15 +65,24 @@ public class TronFieldView extends View {
         super.onDraw(canvas);
         mLogFacility.v(LOG_HASH, "Start onDraw");
         
+        //maps playfield on image
+        final int blockWidth = getWidth() / FIELD_WIDTH;
+        final int blockHeight = getHeight() / FIELD_HEIGHT;
+        mLogFacility.v(LOG_HASH, String.format("width:%s, height:%s", blockWidth, blockHeight));
+        
         //start scanning
         for (int player=0; player<MAX_PLAYERS; player++) {
             for (int x=0; x<FIELD_WIDTH; x++) {
-                for(int y=0; y<FIELD_LENGHT; y++) {
-                    Bitmap tail = findTailImage(x, y, player);
-                    if (null != tail) {
-                        mLogFacility.v(LOG_HASH, String.format("Draw at x:%s, y:%s", x, y));
-                        canvas.drawBitmap(tail, 16*x, 16*y, mBitmapPaint);
+                for(int y=0; y<FIELD_HEIGHT; y++) {
+                    if (EMPTY_FIELD != mPlayfield[x][y]) {
+                        canvas.drawRect(x * blockWidth, y * blockHeight, (x + 1) * blockWidth, (y + 1) * blockHeight,
+                                mPlayerPaints[mPlayfield[x][y]]);
                     }
+//                    Bitmap tail = findTailImage(x, y, player);
+//                    if (null != tail) {
+//                        mLogFacility.v(LOG_HASH, String.format("Draw at x:%s, y:%s", x, y));
+//                        canvas.drawBitmap(tail, 16*x, 16*y, mBitmapPaint);
+//                    }
                 }
             }
         }
@@ -85,20 +94,49 @@ public class TronFieldView extends View {
         mLogFacility = AppEnv.i(context).getLogFacility();
         
         for (int x=0; x<FIELD_WIDTH; x++) {
-            for(int y=0; y<FIELD_LENGHT; y++) {
-                mTronField[x][y] = EMPTY_FIELD;
+            for(int y=0; y<FIELD_HEIGHT; y++) {
+                mPlayfield[x][y] = EMPTY_FIELD;
             }
         }
-        mTronField[3][1] = 0;
-        mTronField[4][1] = 0;
-        mTronField[5][1] = 0;
-        mTronField[6][1] = 0;
-        mTronField[7][1] = 0;
-        mTronField[8][1] = 0;
+        mPlayfield[3][1] = 0;
+        mPlayfield[4][1] = 0;
+        mPlayfield[5][1] = 0;
+        mPlayfield[6][1] = 0;
+        mPlayfield[7][1] = 0;
+        mPlayfield[8][1] = 0;
         
+        mPlayfield[6][1] = 1;
+        mPlayfield[6][2] = 1;
+        mPlayfield[6][3] = 1;
+        mPlayfield[6][4] = 1;
+        mPlayfield[6][5] = 1;
+        mPlayfield[6][6] = 1;
+
         Resources res = context.getResources();
         mBitmapPaint = new Paint();
         mBitmapPaint.setFilterBitmap(true);
+        
+        for (int player=0; player<MAX_PLAYERS; player++) {
+            Paint paint = new Paint();
+            paint.setStyle(Paint.Style.FILL);
+            switch (player) {
+            case 0:
+                paint.setColor(res.getColor(android.R.color.white));
+                break;
+            case 1:
+                paint.setColor(res.getColor(android.R.color.holo_green_light));
+                break;
+            case 2:
+                paint.setColor(res.getColor(android.R.color.holo_orange_light));
+                break;
+            case 3:
+                paint.setColor(res.getColor(android.R.color.holo_purple));
+                break;
+            default:
+                paint.setColor(res.getColor(android.R.color.black));
+            }
+            mPlayerPaints[player] = paint;
+        }
         
         int player = 0;
         mTails[TAIL_HORIZONTAL][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_horizonal);
@@ -106,6 +144,10 @@ public class TronFieldView extends View {
         mTails[TAIL_UPRIGHT][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_upright);
         mTails[TAIL_RIGHTDOWN][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_rightdown);
         mTails[TAIL_RIGHTUP][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_rightup);
+    }
+    
+    public void setPlayfield(byte[][] playfield) {
+        mPlayfield = playfield;
     }
     
     /**
@@ -120,14 +162,14 @@ public class TronFieldView extends View {
      * @return
      */
     private Bitmap findTailImage(int x, int y, int player) {
-        if (x > 0 && x < (FIELD_WIDTH - 1) && y > 0 && y < (FIELD_LENGHT -1)) {
-            if (checkTuple(mTronField[x-1][y], mTronField[x][y], mTronField[x+1][y], player))
+        if (x > 0 && x < (FIELD_WIDTH - 1) && y > 0 && y < (FIELD_HEIGHT -1)) {
+            if (checkTuple(mPlayfield[x-1][y], mPlayfield[x][y], mPlayfield[x+1][y], player))
                     return mTails[TAIL_HORIZONTAL][player];
-            if (checkTuple(mTronField[x][y-1], mTronField[x][y], mTronField[x][y+1], player))
+            if (checkTuple(mPlayfield[x][y-1], mPlayfield[x][y], mPlayfield[x][y+1], player))
                 return mTails[TAIL_VERTICAL][player];
-            if (checkTuple(mTronField[x][y-1], mTronField[x][y], mTronField[x+1][y], player))
+            if (checkTuple(mPlayfield[x][y-1], mPlayfield[x][y], mPlayfield[x+1][y], player))
                 return mTails[TAIL_DOWNRIGHT][player];
-        }
+        } else if (x > 0)
         //searches for near moves of the same player
         if (0==x && 0==y) {
             
