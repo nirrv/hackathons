@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icona"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -18,23 +18,70 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape"
         >
-<!--             <intent-filter> -->
-<!--                 <action android:name="android.intent.action.MAIN" /> -->
-
-<!--                 <category android:name="android.intent.category.LAUNCHER" /> -->
-<!--             </intent-filter> -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="it.rainbowbreeze.hackitaly13.action.RUN_FROM_DASHBOARD" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="it.rainbowbreeze.hackitaly13.ui.MainGameActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
         >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--             <intent-filter> -->
+<!--                 <action android:name="android.intent.action.MAIN" /> -->
+<!--                 <category android:name="android.intent.category.LAUNCHER" /> -->
+<!--             </intent-filter> -->
+<!--             <intent-filter> -->
+<!--                 <action android:name="it.rainbowbreeze.hackitaly13.action.RUN_FROM_DASHBOARD" /> -->
+<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
+<!--             </intent-filter> -->
         </activity>
+        
+<meta-data
+            android:name="type"
+            android:value="NativeAppStaticPreview" />
+        <meta-data
+            android:name="version"
+            android:value="0.0.1" />
+        <meta-data
+            android:name="height"
+            android:value="2" />
+        <meta-data
+            android:name="width"
+            android:value="2" />
+        <meta-data
+            android:name="position"
+            android:value="874" />
+        <meta-data
+            android:name="startType"
+            android:value="Activity" />
+        <meta-data
+            android:name="startWith"
+            android:value="it.rainbowbreeze.hackitaly13.action.RUN_FROM_DASHBOARD" />
+        <meta-data
+            android:name="tag"
+            android:value="application" />
+        <meta-data
+            android:name="showWhenLogged"
+            android:value="true" />
+        <meta-data
+            android:name="showWhenNotLogged"
+            android:value="true" />
+        <meta-data
+            android:name="showWhenTraining"
+            android:value="true" />
+        <meta-data
+            android:name="showWhenNotTraining"
+            android:value="true" />
+        <meta-data
+            android:name="isTopLevel"
+            android:value="true" />
+                
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

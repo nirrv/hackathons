@@ -13,6 +13,13 @@
         android:layout_height="165px"
         android:background="@color/game_button_back"
     >
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/teschio"
+            android:layout_marginTop="70px"
+            android:layout_marginLeft="60px"
+        />
         <TextView
             android:id="@+id/maingame_lblCollisions"
             android:layout_width="130px"

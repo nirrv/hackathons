@@ -6,6 +6,7 @@ package it.rainbowbreeze.hackitaly13.ui;
 import it.rainbowbreeze.hackitaly13.R;
 import it.rainbowbreeze.hackitaly13.common.AppEnv;
 import it.rainbowbreeze.hackitaly13.common.LogFacility;
+import it.rainbowbreeze.hackitaly13.logic.GameManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -24,9 +25,9 @@ public class TronFieldView extends View {
     
     private LogFacility mLogFacility;
     
-    private final static int FIELD_WIDTH = 20;
-    private final static int FIELD_HEIGHT = 20;
-    private static final int MAX_PLAYERS = 3;
+    private final static int FIELD_WIDTH = GameManager.FIELD_WIDTH;
+    private final static int FIELD_HEIGHT = GameManager.FIELD_HEIGHT;
+    private static final int MAX_PLAYERS = GameManager.MAX_PLAYERS;
     private static final byte EMPTY_FIELD = -1;
 
     private static final int TAIL_HORIZONTAL = 1;
@@ -63,12 +64,12 @@ public class TronFieldView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mLogFacility.v(LOG_HASH, "Start onDraw");
+//        mLogFacility.v(LOG_HASH, "Start onDraw");
         
         //maps playfield on image
         final int blockWidth = getWidth() / FIELD_WIDTH;
         final int blockHeight = getHeight() / FIELD_HEIGHT;
-        mLogFacility.v(LOG_HASH, String.format("width:%s, height:%s", blockWidth, blockHeight));
+//        mLogFacility.v(LOG_HASH, String.format("width:%s, height:%s", blockWidth, blockHeight));
         
         //start scanning
         for (int player=0; player<MAX_PLAYERS; player++) {
@@ -87,7 +88,7 @@ public class TronFieldView extends View {
             }
         }
         
-        mLogFacility.v(LOG_HASH, "End onDraw");
+//        mLogFacility.v(LOG_HASH, "End onDraw");
     }
 
     private void initVars(Context context) {
@@ -98,19 +99,19 @@ public class TronFieldView extends View {
                 mPlayfield[x][y] = EMPTY_FIELD;
             }
         }
-        mPlayfield[3][1] = 0;
-        mPlayfield[4][1] = 0;
-        mPlayfield[5][1] = 0;
-        mPlayfield[6][1] = 0;
-        mPlayfield[7][1] = 0;
-        mPlayfield[8][1] = 0;
-        
-        mPlayfield[6][1] = 1;
-        mPlayfield[6][2] = 1;
-        mPlayfield[6][3] = 1;
-        mPlayfield[6][4] = 1;
-        mPlayfield[6][5] = 1;
-        mPlayfield[6][6] = 1;
+//        mPlayfield[3][1] = 0;
+//        mPlayfield[4][1] = 0;
+//        mPlayfield[5][1] = 0;
+//        mPlayfield[6][1] = 0;
+//        mPlayfield[7][1] = 0;
+//        mPlayfield[8][1] = 0;
+//        
+//        mPlayfield[6][1] = 1;
+//        mPlayfield[6][2] = 1;
+//        mPlayfield[6][3] = 1;
+//        mPlayfield[6][4] = 1;
+//        mPlayfield[6][5] = 1;
+//        mPlayfield[6][6] = 1;
 
         Resources res = context.getResources();
         mBitmapPaint = new Paint();
@@ -138,12 +139,12 @@ public class TronFieldView extends View {
             mPlayerPaints[player] = paint;
         }
         
-        int player = 0;
-        mTails[TAIL_HORIZONTAL][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_horizonal);
-        mTails[TAIL_VERTICAL][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_vertical);
-        mTails[TAIL_UPRIGHT][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_upright);
-        mTails[TAIL_RIGHTDOWN][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_rightdown);
-        mTails[TAIL_RIGHTUP][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_rightup);
+//        int player = 0;
+//        mTails[TAIL_HORIZONTAL][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_horizonal);
+//        mTails[TAIL_VERTICAL][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_vertical);
+//        mTails[TAIL_UPRIGHT][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_upright);
+//        mTails[TAIL_RIGHTDOWN][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_rightdown);
+//        mTails[TAIL_RIGHTUP][player] = BitmapFactory.decodeResource(res, R.drawable.tail_blue_rightup);
     }
     
     public void setPlayfield(byte[][] playfield) {

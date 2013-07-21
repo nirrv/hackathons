@@ -3,20 +3,16 @@
  */
 package it.rainbowbreeze.technogym.realtime.logic;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import it.rainbowbreeze.libs.common.IRainbowLogFacility;
+import it.rainbowbreeze.technogym.realtime.comm.GymActivity;
+import it.rainbowbreeze.technogym.realtime.comm.model.GymActivityData;
+import android.content.Context;
+import android.content.Intent;
 
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.technogym.android.myvisio.api.Equipment;
 import com.technogym.android.myvisio.api.Training;
-
-import android.content.Context;
-
-import it.rainbowbreeze.libs.common.IRainbowLogFacility;
-import it.rainbowbreeze.technogym.realtime.comm.GymActivity;
-import it.rainbowbreeze.technogym.realtime.comm.model.GymActivityData;
 
 /**
  * @author alfredomorresi
@@ -37,17 +33,17 @@ public class GymActivityManager {
     }
     
     public void turnLeft(Context context) {
-        //sends new user data
-        GymActivityData data = gatherData(context);
-        data.turnLeft();
-        uploadDataToServer(data);
+        mLogFacility.v(LOG_HASH, "Turning left");
+//        GymActivityData data = gatherData(context);
+//        data.turnLeft();
+//        uploadDataToServer(data);
     }
     
     public void turnRight(Context context) {
-        //sends new user data
-        GymActivityData data = gatherData(context);
-        data.turnRight();
-        uploadDataToServer(data);
+        mLogFacility.v(LOG_HASH, "Turning right");
+//        GymActivityData data = gatherData(context);
+//        data.turnRight();
+//        uploadDataToServer(data);
     }
     
     public boolean increaseSpeed(Context context) {
@@ -58,9 +54,11 @@ public class GymActivityManager {
         return changeSpeed(context, -SPEED_DELTA);
     }
 
-    public void startWorkout() {
+    public void startWorkout(Context context) {
         mLogFacility.e(LOG_HASH, "Starting workout");
-        //TODO
+//        Intent intent = new Intent("com.technogym.android.visiowow.training.easystart.action.RUN_FROM_DASHBOARD");
+        Intent intent = new Intent("com.technogym.android.visiowow.training.easystart.action.RUN_FROM_READY_TO_USE");
+        context.startService(intent);
     }    
     
     private boolean changeSpeed(Context context, double deltaChange) {
@@ -87,9 +85,13 @@ public class GymActivityManager {
         eq.set(Equipment.SPEED, (currentSpeed + deltaChange));
         
         //sends new user data
-        GymActivityData data = gatherData(context);
-        uploadDataToServer(data);
+//        GymActivityData data = gatherData(context);
+//        uploadDataToServer(data);
         return true;
+    }
+    
+    public double getSpeed(Context context) {
+        return Equipment.getInstance(context).getDouble(Equipment.SPEED);
     }
     
     /**
@@ -113,6 +115,7 @@ public class GymActivityManager {
     private GymActivityData gatherData(Context context) {
         //get current training seconds
         String timeSec = Training.getInstance(context).getString(Training.TIME);
+        mLogFacility.v(LOG_HASH, "timesec: " + timeSec);
         long sec = -1;
         try {
             sec = Long.getLong(timeSec);
@@ -120,11 +123,8 @@ public class GymActivityManager {
             mLogFacility.e(e);
         }
         
-        if (-1 == sec) {
-            //TODO return
-        }
-        
-        int distance = Equipment.getInstance(context).getInt(Training.DISTANCE); //meters?
+        int distance = Training.getInstance(context).getInt(Training.DISTANCE); //meters?
+        mLogFacility.v(LOG_HASH, "distance: " + distance);
         
         //prepared the package
         GymActivityData data = new GymActivityData()
