@@ -14,14 +14,21 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="it.rainbowbreeze.hackitaly13.ui.IntroActivity"
-            android:label="@string/app_name" >
+            android:name="it.rainbowbreeze.hackitaly13.ui.RoomSetupActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="it.rainbowbreeze.hackitaly13.ui.MainGameActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+        />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

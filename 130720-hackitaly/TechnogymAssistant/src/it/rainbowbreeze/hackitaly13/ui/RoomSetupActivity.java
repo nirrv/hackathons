@@ -7,14 +7,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class IntroActivity extends Activity
+public class RoomSetupActivity extends Activity
 {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.act_intro);
+		setContentView(R.layout.act_roomsetup);
 		
 		Thread t = new Thread(new Runnable() {
             @Override

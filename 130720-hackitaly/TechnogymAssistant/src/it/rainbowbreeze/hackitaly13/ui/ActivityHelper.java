@@ -24,8 +24,8 @@ public class ActivityHelper extends RainbowActivityHelper {
     // --------------------------------------- Public Properties
 
     // ------------------------------------------ Public Methods
-    public void openFacesFromImages(Activity callerActivity) {
-//        openActivity(callerActivity, FacesFromImagesActivity.class, null, false, REQUESTCODE_NONE);
+    public void openMainGame(Activity callerActivity) {
+        openActivity(callerActivity, MainGameActivity.class, null, false, REQUESTCODE_NONE);
     }
 
     // ----------------------------------------- Private Methods
